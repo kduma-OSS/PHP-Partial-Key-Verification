@@ -4,11 +4,11 @@
 [![Tests](https://img.shields.io/github/actions/workflow/status/kduma-OSS/PHP-Partial-Key-Verification/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/kduma-OSS/PHP-Partial-Key-Verification/actions/workflows/run-tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/kduma/pkv.svg?style=flat-square)](https://packagist.org/packages/kduma/pkv)
 
-This is a port of my other C# library [Partial Key Verification Library for Compact Framework](https://opensource.duma.sh/libraries/partial-key-verification-compact-framework) into a PHP package.
+This is a port of my other C# library [Partial Key Verification Library for Compact Framework](https://opensource.duma.sh/libraries/net/partial-key-verification) into a PHP package.
 
 This library implements Partial Key Verification (PKV). PKV is a cryptographic technique that allows verification of a subset of a key without revealing the entire key, enhancing security and privacy in various applications.
 
-Check full documentation here: [opensource.duma.sh/libraries/partial-key-verification-php](https://opensource.duma.sh/libraries/partial-key-verification-php)
+Check full documentation here: [opensource.duma.sh/libraries/php/partial-key-verification](https://opensource.duma.sh/libraries/php/partial-key-verification)
 
 
 ## Installation
