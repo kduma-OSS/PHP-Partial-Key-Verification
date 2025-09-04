@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tests\PKV\Hash;
@@ -10,15 +11,15 @@ use PHPUnit\Framework\TestCase;
 
 #[CoversClass(\KDuma\PKV\Hash\Jenkins96::class)] final class Jenkins96Test extends TestCase
 {
-    public function testImplementsInterface(): void
+    public function test_implements_interface(): void
     {
-        $h = new Jenkins96();
+        $h = new Jenkins96;
         $this->assertInstanceOf(HashInterface::class, $h);
     }
 
-    public function testDeterministicAndRange(): void
+    public function test_deterministic_and_range(): void
     {
-        $h = new Jenkins96();
+        $h = new Jenkins96;
         $inputs = [
             '',
             'a',
@@ -27,7 +28,7 @@ use PHPUnit\Framework\TestCase;
             'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
             'abcdefghijklmnopqrstuvwxyz',
             '1234567890',
-            "The quick brown fox jumps over the lazy dog",
+            'The quick brown fox jumps over the lazy dog',
             "\x00\x00\x00\x00",
             "\xFF\xFF\xFF\xFF",
             random_bytes(17),
@@ -45,9 +46,9 @@ use PHPUnit\Framework\TestCase;
         }
     }
 
-    public function testMatchesReferenceImplementation(): void
+    public function test_matches_reference_implementation(): void
     {
-        $h = new Jenkins96();
+        $h = new Jenkins96;
 
         $inputs = [
             '',
@@ -62,14 +63,14 @@ use PHPUnit\Framework\TestCase;
 
         foreach ($inputs as $data) {
             $expected = self::refJenkins96($data);
-            $actual   = $h->compute($data);
+            $actual = $h->compute($data);
             $this->assertSame($expected, $actual, 'Mismatch vs local reference');
         }
     }
 
-    public function testSensitivityToChanges(): void
+    public function test_sensitivity_to_changes(): void
     {
-        $h = new Jenkins96();
+        $h = new Jenkins96;
         $this->assertNotSame($h->compute('foo'), $h->compute('bar'));
         $this->assertNotSame($h->compute('foo'), $h->compute('foo '));
         $this->assertNotSame($h->compute('foo'), $h->compute('foO'));
@@ -89,17 +90,17 @@ use PHPUnit\Framework\TestCase;
 
         while ($i + 12 <= $len) {
             $a = ($a + \ord($data[$i++])) & 0xFFFFFFFF;
-            $a = ($a + ((\ord($data[$i++]) << 8)  & 0xFFFFFFFF)) & 0xFFFFFFFF;
+            $a = ($a + ((\ord($data[$i++]) << 8) & 0xFFFFFFFF)) & 0xFFFFFFFF;
             $a = ($a + ((\ord($data[$i++]) << 16) & 0xFFFFFFFF)) & 0xFFFFFFFF;
             $a = ($a + ((\ord($data[$i++]) << 24) & 0xFFFFFFFF)) & 0xFFFFFFFF;
 
             $b = ($b + \ord($data[$i++])) & 0xFFFFFFFF;
-            $b = ($b + ((\ord($data[$i++]) << 8)  & 0xFFFFFFFF)) & 0xFFFFFFFF;
+            $b = ($b + ((\ord($data[$i++]) << 8) & 0xFFFFFFFF)) & 0xFFFFFFFF;
             $b = ($b + ((\ord($data[$i++]) << 16) & 0xFFFFFFFF)) & 0xFFFFFFFF;
             $b = ($b + ((\ord($data[$i++]) << 24) & 0xFFFFFFFF)) & 0xFFFFFFFF;
 
             $c = ($c + \ord($data[$i++])) & 0xFFFFFFFF;
-            $c = ($c + ((\ord($data[$i++]) << 8)  & 0xFFFFFFFF)) & 0xFFFFFFFF;
+            $c = ($c + ((\ord($data[$i++]) << 8) & 0xFFFFFFFF)) & 0xFFFFFFFF;
             $c = ($c + ((\ord($data[$i++]) << 16) & 0xFFFFFFFF)) & 0xFFFFFFFF;
             $c = ($c + ((\ord($data[$i++]) << 24) & 0xFFFFFFFF)) & 0xFFFFFFFF;
 
@@ -108,19 +109,41 @@ use PHPUnit\Framework\TestCase;
 
         $c = ($c + ($len & 0xFFFFFFFF)) & 0xFFFFFFFF;
 
-        if ($i < $len) { $a = ($a + \ord($data[$i++])) & 0xFFFFFFFF; }
-        if ($i < $len) { $a = ($a + ((\ord($data[$i++]) << 8)  & 0xFFFFFFFF)) & 0xFFFFFFFF; }
-        if ($i < $len) { $a = ($a + ((\ord($data[$i++]) << 16) & 0xFFFFFFFF)) & 0xFFFFFFFF; }
-        if ($i < $len) { $a = ($a + ((\ord($data[$i++]) << 24) & 0xFFFFFFFF)) & 0xFFFFFFFF; }
+        if ($i < $len) {
+            $a = ($a + \ord($data[$i++])) & 0xFFFFFFFF;
+        }
+        if ($i < $len) {
+            $a = ($a + ((\ord($data[$i++]) << 8) & 0xFFFFFFFF)) & 0xFFFFFFFF;
+        }
+        if ($i < $len) {
+            $a = ($a + ((\ord($data[$i++]) << 16) & 0xFFFFFFFF)) & 0xFFFFFFFF;
+        }
+        if ($i < $len) {
+            $a = ($a + ((\ord($data[$i++]) << 24) & 0xFFFFFFFF)) & 0xFFFFFFFF;
+        }
 
-        if ($i < $len) { $b = ($b + \ord($data[$i++])) & 0xFFFFFFFF; }
-        if ($i < $len) { $b = ($b + ((\ord($data[$i++]) << 8)  & 0xFFFFFFFF)) & 0xFFFFFFFF; }
-        if ($i < $len) { $b = ($b + ((\ord($data[$i++]) << 16) & 0xFFFFFFFF)) & 0xFFFFFFFF; }
-        if ($i < $len) { $b = ($b + ((\ord($data[$i++]) << 24) & 0xFFFFFFFF)) & 0xFFFFFFFF; }
+        if ($i < $len) {
+            $b = ($b + \ord($data[$i++])) & 0xFFFFFFFF;
+        }
+        if ($i < $len) {
+            $b = ($b + ((\ord($data[$i++]) << 8) & 0xFFFFFFFF)) & 0xFFFFFFFF;
+        }
+        if ($i < $len) {
+            $b = ($b + ((\ord($data[$i++]) << 16) & 0xFFFFFFFF)) & 0xFFFFFFFF;
+        }
+        if ($i < $len) {
+            $b = ($b + ((\ord($data[$i++]) << 24) & 0xFFFFFFFF)) & 0xFFFFFFFF;
+        }
 
-        if ($i < $len) { $c = ($c + ((\ord($data[$i++]) << 8)  & 0xFFFFFFFF)) & 0xFFFFFFFF; }
-        if ($i < $len) { $c = ($c + ((\ord($data[$i++]) << 16) & 0xFFFFFFFF)) & 0xFFFFFFFF; }
-        if ($i < $len) { $c = ($c + ((\ord($data[$i])  << 24) & 0xFFFFFFFF)) & 0xFFFFFFFF; }
+        if ($i < $len) {
+            $c = ($c + ((\ord($data[$i++]) << 8) & 0xFFFFFFFF)) & 0xFFFFFFFF;
+        }
+        if ($i < $len) {
+            $c = ($c + ((\ord($data[$i++]) << 16) & 0xFFFFFFFF)) & 0xFFFFFFFF;
+        }
+        if ($i < $len) {
+            $c = ($c + ((\ord($data[$i]) << 24) & 0xFFFFFFFF)) & 0xFFFFFFFF;
+        }
 
         self::mix($a, $b, $c);
 
@@ -130,14 +153,23 @@ use PHPUnit\Framework\TestCase;
     /** same "mix" as in the class */
     private static function mix(int &$a, int &$b, int &$c): void
     {
-        $a = ($a - $b - $c) & 0xFFFFFFFF; $a ^= ($c >> 13);
-        $b = ($b - $c - $a) & 0xFFFFFFFF; $b ^= (($a << 8)  & 0xFFFFFFFF);
-        $c = ($c - $a - $b) & 0xFFFFFFFF; $c ^= ($b >> 13);
-        $a = ($a - $b - $c) & 0xFFFFFFFF; $a ^= ($c >> 12);
-        $b = ($b - $c - $a) & 0xFFFFFFFF; $b ^= (($a << 16) & 0xFFFFFFFF);
-        $c = ($c - $a - $b) & 0xFFFFFFFF; $c ^= ($b >> 5);
-        $a = ($a - $b - $c) & 0xFFFFFFFF; $a ^= ($c >> 3);
-        $b = ($b - $c - $a) & 0xFFFFFFFF; $b ^= (($a << 10) & 0xFFFFFFFF);
-        $c = ($c - $a - $b) & 0xFFFFFFFF; $c ^= ($b >> 15);
+        $a = ($a - $b - $c) & 0xFFFFFFFF;
+        $a ^= ($c >> 13);
+        $b = ($b - $c - $a) & 0xFFFFFFFF;
+        $b ^= (($a << 8) & 0xFFFFFFFF);
+        $c = ($c - $a - $b) & 0xFFFFFFFF;
+        $c ^= ($b >> 13);
+        $a = ($a - $b - $c) & 0xFFFFFFFF;
+        $a ^= ($c >> 12);
+        $b = ($b - $c - $a) & 0xFFFFFFFF;
+        $b ^= (($a << 16) & 0xFFFFFFFF);
+        $c = ($c - $a - $b) & 0xFFFFFFFF;
+        $c ^= ($b >> 5);
+        $a = ($a - $b - $c) & 0xFFFFFFFF;
+        $a ^= ($c >> 3);
+        $b = ($b - $c - $a) & 0xFFFFFFFF;
+        $b ^= (($a << 10) & 0xFFFFFFFF);
+        $c = ($c - $a - $b) & 0xFFFFFFFF;
+        $c ^= ($b >> 15);
     }
 }

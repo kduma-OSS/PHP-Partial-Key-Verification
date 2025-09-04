@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tests\PKV\Hash;
@@ -10,15 +11,15 @@ use PHPUnit\Framework\TestCase;
 
 #[CoversClass(\KDuma\PKV\Hash\OneAtATime::class)] final class OneAtATimeTest extends TestCase
 {
-    public function testImplementsInterface(): void
+    public function test_implements_interface(): void
     {
-        $h = new OneAtATime();
+        $h = new OneAtATime;
         $this->assertInstanceOf(HashInterface::class, $h);
     }
 
-    public function testDeterministicAndRange(): void
+    public function test_deterministic_and_range(): void
     {
-        $h = new OneAtATime();
+        $h = new OneAtATime;
         $inputs = [
             '',
             'a',
@@ -27,7 +28,7 @@ use PHPUnit\Framework\TestCase;
             'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
             'abcdefghijklmnopqrstuvwxyz',
             '1234567890',
-            "The quick brown fox jumps over the lazy dog",
+            'The quick brown fox jumps over the lazy dog',
             "\x00\x00\x00\x00",
             "\xFF\xFF\xFF\xFF",
             random_bytes(17),
@@ -45,9 +46,9 @@ use PHPUnit\Framework\TestCase;
         }
     }
 
-    public function testMatchesLocalReference(): void
+    public function test_matches_local_reference(): void
     {
-        $h = new OneAtATime();
+        $h = new OneAtATime;
 
         $inputs = [
             '',
@@ -66,9 +67,9 @@ use PHPUnit\Framework\TestCase;
         }
     }
 
-    public function testSensitivityToChanges(): void
+    public function test_sensitivity_to_changes(): void
     {
-        $h = new OneAtATime();
+        $h = new OneAtATime;
         $this->assertNotSame($h->compute('foo'), $h->compute('bar'));
         $this->assertNotSame($h->compute('foo'), $h->compute('foo '));
         $this->assertNotSame($h->compute('foo'), $h->compute('foO'));

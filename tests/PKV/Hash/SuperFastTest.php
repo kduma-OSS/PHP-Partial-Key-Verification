@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tests\PKV\Hash;
@@ -10,15 +11,15 @@ use PHPUnit\Framework\TestCase;
 
 #[CoversClass(\KDuma\PKV\Hash\SuperFast::class)] final class SuperFastTest extends TestCase
 {
-    public function testImplementsInterface(): void
+    public function test_implements_interface(): void
     {
-        $h = new SuperFast();
+        $h = new SuperFast;
         $this->assertInstanceOf(HashInterface::class, $h);
     }
 
-    public function testDeterministicAndRange(): void
+    public function test_deterministic_and_range(): void
     {
-        $h = new SuperFast();
+        $h = new SuperFast;
         $inputs = [
             '',
             'a',
@@ -30,7 +31,7 @@ use PHPUnit\Framework\TestCase;
             'abcdefg',
             'abcdefgh',           // exercises all tail branches 0..3
             '123456789',
-            "The quick brown fox jumps over the lazy dog",
+            'The quick brown fox jumps over the lazy dog',
             "\x00",
             "\x00\xFF\x01\x02\x03",
             random_bytes(17),
@@ -48,9 +49,9 @@ use PHPUnit\Framework\TestCase;
         }
     }
 
-    public function testMatchesReferenceImplementation(): void
+    public function test_matches_reference_implementation(): void
     {
-        $h = new SuperFast();
+        $h = new SuperFast;
         $inputs = [
             '',
             'a',
@@ -69,9 +70,9 @@ use PHPUnit\Framework\TestCase;
         }
     }
 
-    public function testSensitivityToChanges(): void
+    public function test_sensitivity_to_changes(): void
     {
-        $h = new SuperFast();
+        $h = new SuperFast;
         $this->assertNotSame($h->compute('foo'), $h->compute('bar'));
         $this->assertNotSame($h->compute('foo'), $h->compute('foo '));
         $this->assertNotSame($h->compute('foo'), $h->compute('foO'));
@@ -86,7 +87,7 @@ use PHPUnit\Framework\TestCase;
         $len = \strlen($data);
         $hash = $len & 0xFFFFFFFF;
 
-        $rem   = $len & 3;
+        $rem = $len & 3;
         $pairs = $len >> 2;
         $offset = 0;
 
@@ -97,7 +98,7 @@ use PHPUnit\Framework\TestCase;
             $next = self::u16le($data, $offset);
             $offset += 2;
 
-            $tmp  = ((($next << 11) & 0xFFFFFFFF) ^ $hash) & 0xFFFFFFFF;
+            $tmp = ((($next << 11) & 0xFFFFFFFF) ^ $hash) & 0xFFFFFFFF;
             $hash = ((($hash << 16) & 0xFFFFFFFF) ^ $tmp) & 0xFFFFFFFF;
             $hash = ($hash + (($hash >> 11) & 0xFFFFFFFF)) & 0xFFFFFFFF;
         }
@@ -142,6 +143,7 @@ use PHPUnit\Framework\TestCase;
     {
         $lo = \ord($data[$offset]) & 0xFF;
         $hi = \ord($data[$offset + 1]) & 0xFF;
+
         return ($lo | ($hi << 8)) & 0xFFFF;
     }
 }

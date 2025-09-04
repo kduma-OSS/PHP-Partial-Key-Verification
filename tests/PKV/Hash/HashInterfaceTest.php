@@ -17,7 +17,7 @@ class HashInterfaceTest extends TestCase
         \KDuma\PKV\Hash\Fnv1a::class,
         \KDuma\PKV\Hash\GeneralizedCrc::class,
         // \KDuma\PKV\Hash\Jenkins06::class,
-         \KDuma\PKV\Hash\Jenkins96::class,
+        \KDuma\PKV\Hash\Jenkins96::class,
         \KDuma\PKV\Hash\OneAtATime::class,
         \KDuma\PKV\Hash\SuperFast::class,
     ];

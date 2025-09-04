@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace KDuma\PKV\Hash;
@@ -12,7 +13,7 @@ final class OneAtATime implements HashInterface
     /**
      * Compute the 32-bit OAAT hash of a binary string.
      *
-     * @param string $data Binary string (equivalent to C# byte[]).
+     * @param  string  $data  Binary string (equivalent to C# byte[]).
      * @return int Unsigned 32-bit integer (0..0xFFFFFFFF).
      */
     public function compute(string $data): int

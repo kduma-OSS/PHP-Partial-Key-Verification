@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace KDuma\PKV\Hash;
@@ -8,7 +9,7 @@ final class SuperFast implements HashInterface
     /**
      * Compute the SuperFast hash of a binary string.
      *
-     * @param string $data Binary string (equivalent to C# byte[]).
+     * @param  string  $data  Binary string (equivalent to C# byte[]).
      * @return int Unsigned 32-bit integer (0..0xFFFFFFFF).
      */
     public function compute(string $data): int
@@ -28,7 +29,7 @@ final class SuperFast implements HashInterface
             $next = self::u16le($data, $offset);
             $offset += 2;
 
-            $tmp  = ((($next << 11) & 0xFFFFFFFF) ^ $hash) & 0xFFFFFFFF;
+            $tmp = ((($next << 11) & 0xFFFFFFFF) ^ $hash) & 0xFFFFFFFF;
             $hash = ((($hash << 16) & 0xFFFFFFFF) ^ $tmp) & 0xFFFFFFFF;
             $hash = ($hash + (($hash >> 11) & 0xFFFFFFFF)) & 0xFFFFFFFF;
         }
@@ -77,6 +78,7 @@ final class SuperFast implements HashInterface
         // little-endian: low byte + (high byte << 8)
         $lo = \ord($data[$offset]) & 0xFF;
         $hi = \ord($data[$offset + 1]) & 0xFF;
+
         return ($lo | ($hi << 8)) & 0xFFFF;
     }
 }
