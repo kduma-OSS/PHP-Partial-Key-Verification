@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<KeyDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BaseKeys>
+    <unsignedInt>3129109879</unsignedInt>
+    <unsignedInt>766109221</unsignedInt>
+    <unsignedInt>534025585</unsignedInt>
+    <unsignedInt>1416678536</unsignedInt>
+    <unsignedInt>4072442218</unsignedInt>
+  </BaseKeys>
+  <Checksum>Adler16</Checksum>
+  <HashFunctions>
+    <HashType>Jenkins96</HashType>
+    <HashType>OneAtATime</HashType>
+    <HashType>OneAtATime</HashType>
+    <HashType>GeneralizedCrc</HashType>
+    <HashType>SuperFast</HashType>
+  </HashFunctions>
+  <Spacing>6</Spacing>
+  <Mask>&gt;AAAAAA-AAAAAA-AAAAAA-AAAAAA-AAAAAA-AAAAAA-AAAAAA</Mask>
+</KeyDefinition>
