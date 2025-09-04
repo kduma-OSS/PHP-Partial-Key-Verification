@@ -1,0 +1,16 @@
+private static function validateKey(string $key): bool {
+	$seed = \KDuma\PKV\PartialKeyValidator::getSerialNumberFromKey($key);
+	$blacklist = [1518008798, 42];
+	if (in_array($seed, $blacklist, true))
+		return false;
+
+	// Validation for key with index 1
+	if (!\KDuma\PKV\PartialKeyValidator::validateKey(new \KDuma\PKV\Checksum\Adler16(), new \KDuma\PKV\Hash\OneAtATime(), $key, 1, 766109221))
+		return false;
+
+	// Validation for key with index 4
+	if (!\KDuma\PKV\PartialKeyValidator::validateKey(new \KDuma\PKV\Checksum\Adler16(), new \KDuma\PKV\Hash\Fnv1a(), $key, 4, 4072442218))
+		return false;
+
+	return true;
+}
