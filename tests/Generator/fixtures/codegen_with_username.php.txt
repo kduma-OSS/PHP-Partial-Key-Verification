@@ -1,0 +1,13 @@
+private static function validateKey(string $userName, string $key): bool {
+	$validator = new \KDuma\PKV\PartialKeyValidator(new \KDuma\PKV\Hash\Fnv1a());
+
+	// Validation for key with index 0
+	if (!$validator->validateKeyWithSeedString(new \KDuma\PKV\Checksum\Crc16(), new \KDuma\PKV\Hash\Fnv1a(), $key, 0, 2863311530, $userName))
+		return false;
+
+	// Validation for key with index 2
+	if (!$validator->validateKeyWithSeedString(new \KDuma\PKV\Checksum\Crc16(), new \KDuma\PKV\Hash\GeneralizedCrc(), $key, 2, 3435973836, $userName))
+		return false;
+
+	return true;
+}
