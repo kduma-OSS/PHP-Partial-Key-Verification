@@ -1,7 +1,7 @@
 # Partial Key Verification Library for PHP
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/kduma/pkv.svg?style=flat-square)](https://packagist.org/packages/kduma/pkv)
-[![Tests](https://img.shields.io/github/actions/workflow/status/kduma-OSS/PHP-Partial-Key-Verification/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/kduma-OSS/PHP-Partial-Key-Verification/actions/workflows/run-tests.yml)
+[![Tests](https://img.shields.io/github/actions/workflow/status/kduma-OSS/PHP-Partial-Key-Verification/run-tests.yml?branch=master&label=tests&style=flat-square)](https://github.com/kduma-OSS/PHP-Partial-Key-Verification/actions/workflows/run-tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/kduma/pkv.svg?style=flat-square)](https://packagist.org/packages/kduma/pkv)
 
 This is a port of my other C# library [Partial Key Verification Library for Compact Framework](https://opensource.duma.sh/libraries/net/partial-key-verification) into a PHP package.
